@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Google</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 100%;
+    background: #202124;
+    color: white;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    overflow-x: hidden;
+}
+
+
+/* =========================
+   PÁGINA PRINCIPAL
+   ========================= */
+
+#inicio {
+    display: block;
+    width: 100%;
+    min-height: 100vh;
+    background: #202124;
+}
+
+
+/* =========================
+   CAMBIO DE PANTALLAS
+   ========================= */
+
+/*
+   Cuando se abre el buscador,
+   la página principal desaparece completamente.
+*/
+
+body:has(#buscador:target) #inicio {
+    display: none;
+}
+
+/*
+   Cuando se abre el panel de IA,
+   la página principal desaparece completamente.
+*/
+
+body:has(#panelIA:target) #inicio {
+    display: none;
+}
+
+
+/*
+   Cuando está abierto el buscador,
+   solamente se muestra el buscador.
+*/
+
+body:has(#buscador:target) #panelIA {
+    display: none;
+}
+
+
+/*
+   Cuando está abierto el panel IA,
+   solamente se muestra el panel IA.
+*/
+
+body:has(#panelIA:target) #buscador {
+    display: none;
+}
+
+
+/* =========================
+   PARTE SUPERIOR
+   ========================= */
+
+.superior {
+    width: 100%;
+    height: 65px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 18px;
+}
+
+
+/* =========================
+   MENÚ
+   ========================= */
+
+.menu {
+    color: white;
+    text-decoration: none;
+    font-size: 27px;
+    line-height: 1;
+}
+
+
+/* =========================
+   USUARIO
+   ========================= */
+
+.usuario {
+    width: 40px;
+    height: 40px;
+
+    border-radius: 50%;
+
+    background: #f29900;
+    color: white;
+
+    text-decoration: none;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 19px;
+    font-weight: bold;
+}
+
+
+/* =========================
+   LOGO
+   ========================= */
+
+.logo {
+    text-align: center;
+
+    margin-top: 95px;
+    margin-bottom: 35px;
+
+    font-size: 54px;
+    font-weight: bold;
+
+    letter-spacing: -4px;
+}
+
+.azul {
+    color: #4285f4;
+}
+
+.rojo {
+    color: #ea4335;
+}
+
+.amarillo {
+    color: #fbbc05;
+}
+
+.verde {
+    color: #34a853;
+}
+
+
+/* =========================
+   BUSCADOR PRINCIPAL
+   ========================= */
+
+.buscador {
+    display: flex;
+
+    align-items: center;
+
+    width: 88%;
+    max-width: 600px;
+
+    height: 55px;
+
+    margin: 0 auto;
+
+    padding: 0 22px;
+
+    border: 1px solid #5f6368;
+
+    border-radius: 30px;
+
+    color: #bfc1c5;
+
+    text-decoration: none;
+
+    font-size: 17px;
+}
+
+.buscador:hover {
+    background: #292a2d;
+}
+
+
+/* =========================
+   BUSCADOR SECUNDARIO
+   ========================= */
+
+#buscador {
+    display: none;
+
+    width: 100%;
+    min-height: 100vh;
+
+    background: #202124;
+
+    padding: 18px 12px 30px 12px;
+}
+
+#buscador:target {
+    display: block;
+}
+
+
+/* =========================
+   CABECERA DE BÚSQUEDA
+   ========================= */
+
+.cabezera-busqueda {
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+
+    gap: 9px;
+}
+
+
+/* =========================
+   FLECHA
+   ========================= */
+
+.flecha {
+    color: white;
+
+    text-decoration: none;
+
+    font-size: 30px;
+
+    width: 35px;
+
+    text-align: center;
+}
+
+
+/* =========================
+   FORMULARIO
+   ========================= */
+
+.formulario {
+    flex: 1;
+
+    display: flex;
+    align-items: center;
+
+    gap: 7px;
+}
+
+
+/* =========================
+   CAMPO
+   ========================= */
+
+.campo {
+    flex: 1;
+
+    min-width: 0;
+
+    height: 50px;
+
+    border: 1px solid #5f6368;
+
+    border-radius: 27px;
+
+    background: transparent;
+
+    color: white;
+
+    padding: 0 45px 0 17px;
+
+    font-size: 16px;
+
+    outline: none;
+}
+
+.campo:focus {
+    border-color: #8ab4f8;
+}
+
+
+/* =========================
+   BOTÓN X
+   ========================= */
+
+.limpiar {
+    width: 43px;
+    height: 43px;
+
+    margin-left: -52px;
+
+    border: none;
+
+    background: transparent;
+
+    color: #9aa0a6;
+
+    font-size: 22px;
+
+    cursor: pointer;
+}
+
+
+/* =========================
+   BOTÓN LUPA
+   ========================= */
+
+.buscar-boton {
+    width: 48px;
+    height: 48px;
+
+    border: 1px solid #5f6368;
+
+    border-radius: 50%;
+
+    background: transparent;
+
+    color: #9aa0a6;
+
+    font-size: 23px;
+
+    cursor: pointer;
+}
+
+
+/* =========================
+   HISTORIAL
+   ========================= */
+
+.busquedas {
+    width: 100%;
+    margin-top: 30px;
+}
+
+
+/* =========================
+   CADA BÚSQUEDA
+   ========================= */
+
+.busqueda-item {
+    display: flex;
+
+    align-items: center;
+
+    width: 100%;
+
+    min-height: 48px;
+
+    padding: 12px 10px;
+
+    color: #e8eaed;
+
+    text-decoration: none;
+
+    border-bottom: 1px solid #3c4043;
+
+    font-size: 15px;
+}
+
+.busqueda-item:hover {
+    background: #292a2d;
+}
+
+
+/* =========================
+   SIN HISTORIAL
+   ========================= */
+
+.sin-historial {
+    display: none;
+
+    padding: 18px 10px;
+
+    color: #9aa0a6;
+
+    font-size: 15px;
+}
+
+
+/* =========================
+   BOTÓN BORRAR
+   ========================= */
+
+.borrar-historial {
+    display: block;
+
+    width: 100%;
+    max-width: 240px;
+
+    height: 45px;
+
+    margin: 28px auto 0 auto;
+
+    border: 1px solid #5f6368;
+
+    border-radius: 24px;
+
+    background: transparent;
+
+    color: #f28b82;
+
+    text-align: center;
+
+    line-height: 43px;
+
+    font-size: 15px;
+
+    cursor: pointer;
+}
+
+.borrar-historial:hover {
+    background: #292a2d;
+}
+
+
+/* =========================
+   PANEL IA
+   ========================= */
+
+#panelIA {
+    display: none;
+
+    width: 100%;
+    min-height: 100vh;
+
+    background: #202124;
+
+    padding: 20px 18px 35px 18px;
+}
+
+#panelIA:target {
+    display: block;
+}
+
+
+/* =========================
+   FLECHA IA
+   ========================= */
+
+.volver {
+    display: block;
+
+    color: white;
+
+    text-decoration: none;
+
+    font-size: 30px;
+
+    margin-bottom: 25px;
+}
+
+
+/* =========================
+   BUSCADOR IA
+   ========================= */
+
+.busqueda-ia {
+    width: 100%;
+
+    height: 50px;
+
+    border: 1px solid #5f6368;
+
+    border-radius: 26px;
+
+    background: transparent;
+
+    color: white;
+
+    padding: 0 18px;
+
+    font-size: 16px;
+
+    outline: none;
+
+    margin-bottom: 25px;
+}
+
+
+/* =========================
+   SERVICIOS IA
+   ========================= */
+
+.ia {
+    display: flex;
+
+    align-items: center;
+
+    width: 100%;
+
+    min-height: 65px;
+
+    margin-bottom: 10px;
+
+    padding: 10px 15px;
+
+    border: 1px solid #3c4043;
+
+    border-radius: 15px;
+
+    color: white;
+
+    text-decoration: none;
+
+    font-size: 17px;
+}
+
+.ia:hover {
+    background: #292a2d;
+}
+
+
+/* =========================
+   ICONOS IA
+   ========================= */
+
+.ia-icono {
+    width: 40px;
+    height: 40px;
+
+    margin-right: 15px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 10px;
+
+    background: #303134;
+
+    font-size: 21px;
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- ==================================================
+     BUSCADOR SECUNDARIO
+     ================================================== -->
+
+<div id="buscador">
+
+    <div class="cabezera-busqueda">
+
+        <a href="#" class="flecha">←</a>
+
+
+        <form
+            action="https://www.google.com/search"
+            method="get"
+            class="formulario"
+            onsubmit="guardarBusqueda()"
+        >
+
+            <input
+                type="search"
+                name="q"
+                id="campoBusqueda"
+                class="campo"
+                placeholder="Buscar en Google"
+                autocomplete="off"
+            >
+
+
+            <button
+                type="reset"
+                class="limpiar"
+            >
+                ×
+            </button>
+
+
+            <button
+                type="submit"
+                class="buscar-boton"
+            >
+                ⌕
+            </button>
+
+        </form>
+
+    </div>
+
+
+    <!-- HISTORIAL -->
+
+    <div
+        class="busquedas"
+        id="listaHistorial"
+    >
+    </div>
+
+
+    <!-- MENSAJE SIN HISTORIAL -->
+
+    <div
+        class="sin-historial"
+        id="sinHistorial"
+    >
+        No hay búsquedas en el historial.
+    </div>
+
+
+    <!-- BOTÓN BORRAR HISTORIAL -->
+
+    <button
+        class="borrar-historial"
+        onclick="borrarHistorial()"
+    >
+        Borrar historial
+    </button>
+
+</div>
+
+
+
+<!-- ==================================================
+     PANEL DE IA
+     ================================================== -->
+
+<div id="panelIA">
+
+    <a
+        href="#"
+        class="volver"
+    >
+        ←
+    </a>
+
+
+    <form
+        action="https://www.google.com/search"
+        method="get"
+    >
+
+        <input
+            type="search"
+            name="q"
+            class="busqueda-ia"
+            placeholder="Buscar"
+            autocomplete="off"
+        >
+
+    </form>
+
+
+    <!-- CHATGPT -->
+
+    <a
+        href="https://chatgpt.com/"
+        class="ia"
+    >
+
+        <span class="ia-icono">
+            ✦
+        </span>
+
+        ChatGPT
+
+    </a>
+
+
+    <!-- GEMINI -->
+
+    <a
+        href="https://gemini.google.com/"
+        class="ia"
+    >
+
+        <span class="ia-icono">
+            ✧
+        </span>
+
+        Gemini
+
+    </a>
+
+
+    <!-- CLAUDE -->
+
+    <a
+        href="https://claude.com/"
+        class="ia"
+    >
+
+        <span class="ia-icono">
+            ◉
+        </span>
+
+        Claude
+
+    </a>
+
+
+    <!-- PERPLEXITY -->
+
+    <a
+        href="https://www.perplexity.ai/"
+        class="ia"
+    >
+
+        <span class="ia-icono">
+            P
+        </span>
+
+        Perplexity
+
+    </a>
+
+</div>
+
+
+
+<!-- ==================================================
+     PÁGINA PRINCIPAL
+     ================================================== -->
+
+<div id="inicio">
+
+
+    <!-- PARTE SUPERIOR -->
+
+    <div class="superior">
+
+
+        <!-- MENÚ -->
+
+        <a
+            href="#panelIA"
+            class="menu"
+        >
+            ☰
+        </a>
+
+
+        <!-- USUARIO -->
+
+        <a
+            href="https://accounts.google.com/"
+            class="usuario"
+        >
+            D
+        </a>
+
+    </div>
+
+
+
+    <!-- LOGO GOOGLE -->
+
+    <div class="logo">
+
+        <span class="azul">G</span>
+        <span class="rojo">o</span>
+        <span class="amarillo">o</span>
+        <span class="azul">g</span>
+        <span class="verde">l</span>
+        <span class="rojo">e</span>
+
+    </div>
+
+
+
+    <!-- BUSCADOR PRINCIPAL -->
+
+    <a
+        href="#buscador"
+        class="buscador"
+    >
+        ⌕&nbsp;&nbsp;Buscar
+    </a>
+
+</div>
+
+
+
+<!-- ==================================================
+     JAVASCRIPT DEL HISTORIAL
+     ================================================== -->
+
+<script>
+
+function cargarHistorial() {
+
+    var historial =
+        JSON.parse(localStorage.getItem("historialGoogle")) || [];
+
+    var lista =
+        document.getElementById("listaHistorial");
+
+    var mensaje =
+        document.getElementById("sinHistorial");
+
+    lista.innerHTML = "";
+
+
+    if (historial.length === 0) {
+
+        mensaje.style.display = "block";
+
+        return;
+    }
+
+
+    mensaje.style.display = "none";
+
+
+    historial.forEach(function(busqueda) {
+
+        var enlace =
+            document.createElement("a");
+
+        enlace.className =
+            "busqueda-item";
+
+        enlace.href =
+            "https://www.google.com/search?q=" +
+            encodeURIComponent(busqueda);
+
+        enlace.innerHTML =
+            "⌕&nbsp;&nbsp;" +
+            escapeHTML(busqueda);
+
+        lista.appendChild(enlace);
+
+    });
+
+}
+
+
+function guardarBusqueda() {
+
+    var campo =
+        document.getElementById("campoBusqueda");
+
+    var texto =
+        campo.value.trim();
+
+
+    if (texto === "") {
+        return true;
+    }
+
+
+    var historial =
+        JSON.parse(localStorage.getItem("historialGoogle")) || [];
+
+
+    /* Evita repetir la misma búsqueda */
+
+    historial =
+        historial.filter(function(item) {
+
+            return item.toLowerCase() !==
+                   texto.toLowerCase();
+
+        });
+
+
+    /* Coloca la búsqueda nueva al principio */
+
+    historial.unshift(texto);
+
+
+    /* Guarda máximo 20 búsquedas */
+
+    historial =
+        historial.slice(0, 20);
+
+
+    localStorage.setItem(
+        "historialGoogle",
+        JSON.stringify(historial)
+    );
+
+
+    return true;
+}
+
+
+function borrarHistorial() {
+
+    localStorage.removeItem("historialGoogle");
+
+    cargarHistorial();
+
+}
+
+
+function escapeHTML(texto) {
+
+    var div =
+        document.createElement("div");
+
+    div.textContent = texto;
+
+    return div.innerHTML;
+
+}
+
+
+/* Cargar historial al abrir la página */
+
+cargarHistorial();
+
+</script>
+
+
+</body>
+</html>
