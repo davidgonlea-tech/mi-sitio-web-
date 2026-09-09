@@ -1,2 +1,846 @@
-# mi-sitio-web-
-aplicación web 
+# <!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Google</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 100%;
+    font-family: Arial, sans-serif;
+    background: #202124;
+    color: white;
+}
+
+/* =========================
+   INTERFAZ PRINCIPAL
+========================= */
+
+#inicio {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.superior {
+    width: 100%;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 18px;
+}
+
+.menu {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 25px;
+    line-height: 1;
+}
+
+.usuario {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: #f29900;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.contenido-principal {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    padding-bottom: 90px;
+}
+
+.logo {
+    font-size: 62px;
+    font-weight: 500;
+    letter-spacing: -4px;
+    margin-bottom: 32px;
+    user-select: none;
+}
+
+.azul {
+    color: #4285f4;
+}
+
+.rojo {
+    color: #ea4335;
+}
+
+.amarillo {
+    color: #fbbc05;
+}
+
+.verde {
+    color: #34a853;
+}
+
+/* BUSCADOR PRINCIPAL */
+
+.buscador {
+    width: min(90%, 580px);
+    height: 52px;
+    border: 1px solid #5f6368;
+    border-radius: 28px;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    color: #bdc1c6;
+    text-decoration: none;
+    font-size: 17px;
+    background: transparent;
+}
+
+.buscador:hover {
+    background: #303134;
+    border-color: #303134;
+}
+
+.buscador-icono {
+    font-size: 27px;
+    margin-right: 12px;
+    line-height: 1;
+}
+
+/* FRANJA Y VERSION SOLO EN LA INTERFAZ PRINCIPAL */
+
+.version-principal {
+    width: 100%;
+    padding: 0 20px 18px 20px;
+    text-align: center;
+}
+
+.version-separador-principal {
+    width: 100%;
+    height: 1px;
+    background: #5f6368;
+    margin-bottom: 12px;
+}
+
+.version-principal-texto {
+    color: #7f8388;
+    font-size: 12px;
+}
+
+
+/* =========================
+   BUSCADOR SECUNDARIO
+========================= */
+
+#buscador {
+    display: none;
+    min-height: 100vh;
+    padding: 0 15px;
+}
+
+#buscador:target {
+    display: block;
+}
+
+.cabezera-busqueda {
+    position: relative;
+    width: 100%;
+    height: 58px;
+    display: flex;
+    align-items: center;
+}
+
+.flecha {
+    position: absolute;
+    left: 0;
+    top: -15px;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-decoration: none;
+    font-size: 28px;
+    z-index: 5;
+}
+
+.formulario {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 22px;
+    width: 100%;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+}
+
+.campo {
+    flex: 1;
+    height: 50px;
+    border: 1px solid #5f6368;
+    border-radius: 26px;
+    background: transparent;
+    color: white;
+    outline: none;
+    padding: 0 48px 0 18px;
+    font-size: 16px;
+}
+
+.campo:focus {
+    border-color: #5f6368;
+}
+
+.campo::placeholder {
+    color: #9aa0a6;
+}
+
+.limpiar {
+    position: absolute;
+    right: 62px;
+    top: 0;
+    width: 48px;
+    height: 50px;
+    border: none;
+    background: transparent;
+    color: #9aa0a6;
+    font-size: 21px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.buscar-boton {
+    width: 50px;
+    height: 50px;
+    flex-shrink: 0;
+    border: none;
+    border-radius: 50%;
+    background: transparent;
+    color: #9aa0a6;
+    font-size: 27px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.buscar-boton:hover {
+    background: #303134;
+}
+
+.busquedas {
+    margin-top: 82px;
+    width: 100%;
+}
+
+.historial-titulo {
+    color: #9aa0a6;
+    font-size: 14px;
+    margin: 0 0 12px 5px;
+}
+
+.historial-item {
+    width: 100%;
+    min-height: 45px;
+    display: flex;
+    align-items: center;
+    padding: 8px 10px;
+    border-bottom: 1px solid #303134;
+    color: #e8eaed;
+    text-decoration: none;
+    font-size: 15px;
+}
+
+.historial-item:hover {
+    background: #303134;
+}
+
+.historial-icono {
+    margin-right: 12px;
+    color: #9aa0a6;
+    font-size: 19px;
+}
+
+#sinHistorial {
+    color: #7f8388;
+    text-align: center;
+    margin-top: 35px;
+    font-size: 14px;
+}
+
+.borrar-historial {
+    display: block;
+    margin: 25px auto 0 auto;
+    padding: 10px 18px;
+    border: 1px solid #5f6368;
+    border-radius: 20px;
+    background: transparent;
+    color: #bdc1c6;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.borrar-historial:hover {
+    background: #303134;
+}
+
+
+/* =========================
+   PANEL DE IA
+========================= */
+
+#panelIA {
+    display: none;
+    min-height: 100vh;
+    padding: 0 15px;
+}
+
+#panelIA:target {
+    display: block;
+}
+
+.cabezera-ia {
+    position: relative;
+    width: 100%;
+    height: 58px;
+}
+
+.volver {
+    position: absolute;
+    left: 0;
+    top: 8px;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-decoration: none;
+    font-size: 28px;
+}
+
+.formulario-ia {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 55px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+}
+
+.busqueda-ia {
+    flex: 1;
+    height: 50px;
+    border: 1px solid #5f6368;
+    border-radius: 26px;
+    background: transparent;
+    color: white;
+    outline: none;
+    padding: 0 48px 0 18px;
+    font-size: 16px;
+}
+
+/* BORDE GRIS TAMBIÉN AL TOCAR EL BUSCADOR DE IA */
+
+.busqueda-ia:focus {
+    border-color: #5f6368;
+}
+
+.busqueda-ia::placeholder {
+    color: #9aa0a6;
+}
+
+/* X DEL BUSCADOR DE IA */
+
+.limpiar-ia {
+    position: absolute;
+    right: 62px;
+    top: 0;
+    width: 48px;
+    height: 50px;
+    border: none;
+    background: transparent;
+    color: #9aa0a6;
+    font-size: 21px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.buscar-ia-boton {
+    width: 50px;
+    height: 50px;
+    flex-shrink: 0;
+    border: none;
+    border-radius: 50%;
+    background: transparent;
+    color: #9aa0a6;
+    font-size: 27px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.buscar-ia-boton:hover {
+    background: #303134;
+}
+
+.lista-ia {
+    margin-top: 125px;
+    width: 100%;
+}
+
+.ia {
+    width: 100%;
+    min-height: 62px;
+    display: flex;
+    align-items: center;
+    padding: 8px 10px;
+    margin-bottom: 8px;
+    border-radius: 12px;
+    color: white;
+    text-decoration: none;
+}
+
+.ia:hover {
+    background: #303134;
+}
+
+.ia-icono {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 14px;
+    font-size: 19px;
+    font-weight: bold;
+    color: white;
+}
+
+/* COLORES DE LOS ICONOS */
+
+.chatgpt {
+    background: #10a37f;
+}
+
+.gemini {
+    background: #4285f4;
+}
+
+.claude {
+    background: #d97757;
+}
+
+.perplexity {
+    background: #20b8cd;
+}
+
+.ia-nombre {
+    font-size: 16px;
+}
+
+
+/* =========================
+   OCULTAR INTERFACES
+========================= */
+
+body:has(#buscador:target) #inicio {
+    display: none;
+}
+
+body:has(#panelIA:target) #inicio {
+    display: none;
+}
+
+body:has(#buscador:target) #panelIA {
+    display: none;
+}
+
+body:has(#panelIA:target) #buscador {
+    display: none;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- =========================
+     INTERFAZ PRINCIPAL
+========================= -->
+
+<section id="inicio">
+
+    <div class="superior">
+
+        <a href="#panelIA" class="menu">☰</a>
+
+        <a href="https://accounts.google.com/" class="usuario">
+            D
+        </a>
+
+    </div>
+
+
+    <div class="contenido-principal">
+
+        <div class="logo">
+            <span class="azul">G</span><span class="rojo">o</span><span class="amarillo">o</span><span class="azul">g</span><span class="verde">l</span><span class="rojo">e</span>
+        </div>
+
+        <a href="#buscador" class="buscador">
+            <span class="buscador-icono">⌕</span>
+            <span>Buscar</span>
+        </a>
+
+    </div>
+
+
+    <!-- FRANJA EXCLUSIVA DE LA PANTALLA PRINCIPAL -->
+
+    <div class="version-principal">
+
+        <div class="version-separador-principal"></div>
+
+        <div class="version-principal-texto">
+            Versión 1.0
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================
+     BUSCADOR SECUNDARIO
+========================= -->
+
+<section id="buscador">
+
+    <div class="cabezera-busqueda">
+
+        <a href="#inicio" class="flecha">←</a>
+
+        <form
+            class="formulario"
+            action="https://www.google.com/search"
+            method="GET"
+            onsubmit="guardarBusqueda()"
+        >
+
+            <input
+                type="search"
+                id="campoBusqueda"
+                name="q"
+                class="campo"
+                placeholder="Buscar"
+                autocomplete="off"
+            >
+
+            <button
+                type="button"
+                class="limpiar"
+                onclick="document.getElementById('campoBusqueda').value=''"
+            >
+                ×
+            </button>
+
+            <button
+                type="submit"
+                class="buscar-boton"
+            >
+                ⌕
+            </button>
+
+        </form>
+
+    </div>
+
+
+    <div class="busquedas">
+
+        <div class="historial-titulo">
+            Historial de búsquedas
+        </div>
+
+        <div id="listaHistorial"></div>
+
+        <div id="sinHistorial">
+            No hay búsquedas recientes.
+        </div>
+
+        <button
+            class="borrar-historial"
+            onclick="borrarHistorial()"
+        >
+            Borrar historial
+        </button>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================
+     PANEL DE IA
+========================= -->
+
+<section id="panelIA">
+
+    <div class="cabezera-ia">
+
+        <a href="#inicio" class="volver">←</a>
+
+        <form
+            class="formulario-ia"
+            action="https://www.google.com/search"
+            method="GET"
+        >
+
+            <input
+                type="search"
+                id="campoBusquedaIA"
+                name="q"
+                class="busqueda-ia"
+                placeholder="Buscar con IA"
+                autocomplete="off"
+            >
+
+            <button
+                type="button"
+                class="limpiar-ia"
+                onclick="document.getElementById('campoBusquedaIA').value=''"
+            >
+                ×
+            </button>
+
+            <button
+                type="submit"
+                class="buscar-ia-boton"
+            >
+                ⌕
+            </button>
+
+        </form>
+
+    </div>
+
+
+    <div class="lista-ia">
+
+        <a
+            href="https://chatgpt.com/"
+            class="ia"
+        >
+            <div class="ia-icono chatgpt">
+                ✦
+            </div>
+
+            <div class="ia-nombre">
+                ChatGPT
+            </div>
+        </a>
+
+
+        <a
+            href="https://gemini.google.com/"
+            class="ia"
+        >
+            <div class="ia-icono gemini">
+                ✦
+            </div>
+
+            <div class="ia-nombre">
+                Gemini
+            </div>
+        </a>
+
+
+        <a
+            href="https://claude.com/"
+            class="ia"
+        >
+            <div class="ia-icono claude">
+                ✦
+            </div>
+
+            <div class="ia-nombre">
+                Claude
+            </div>
+        </a>
+
+
+        <a
+            href="https://www.perplexity.ai/"
+            class="ia"
+        >
+            <div class="ia-icono perplexity">
+                P
+            </div>
+
+            <div class="ia-nombre">
+                Perplexity
+            </div>
+        </a>
+
+    </div>
+
+</section>
+
+
+
+<script>
+
+/* =========================
+   HISTORIAL DE BÚSQUEDAS
+========================= */
+
+function cargarHistorial() {
+
+    const historial =
+        JSON.parse(localStorage.getItem("historialGoogle")) || [];
+
+    const lista =
+        document.getElementById("listaHistorial");
+
+    const sinHistorial =
+        document.getElementById("sinHistorial");
+
+    lista.innerHTML = "";
+
+    if (historial.length === 0) {
+
+        sinHistorial.style.display = "block";
+
+        return;
+    }
+
+    sinHistorial.style.display = "none";
+
+    historial.forEach(function(busqueda) {
+
+        const enlace =
+            document.createElement("a");
+
+        enlace.className = "historial-item";
+
+        enlace.href =
+            "https://www.google.com/search?q=" +
+            encodeURIComponent(busqueda);
+
+        const icono =
+            document.createElement("span");
+
+        icono.className = "historial-icono";
+
+        icono.textContent = "↻";
+
+        const texto =
+            document.createElement("span");
+
+        texto.textContent = busqueda;
+
+        enlace.appendChild(icono);
+        enlace.appendChild(texto);
+
+        lista.appendChild(enlace);
+
+    });
+}
+
+
+/* =========================
+   GUARDAR BÚSQUEDA
+========================= */
+
+function guardarBusqueda() {
+
+    const campo =
+        document.getElementById("campoBusqueda");
+
+    const texto =
+        campo.value.trim();
+
+    if (!texto) {
+        return;
+    }
+
+    let historial =
+        JSON.parse(localStorage.getItem("historialGoogle")) || [];
+
+    historial =
+        historial.filter(function(item) {
+
+            return item.toLowerCase() !== texto.toLowerCase();
+
+        });
+
+    historial.unshift(texto);
+
+    historial =
+        historial.slice(0, 20);
+
+    localStorage.setItem(
+        "historialGoogle",
+        JSON.stringify(historial)
+    );
+}
+
+
+/* =========================
+   BORRAR HISTORIAL
+========================= */
+
+function borrarHistorial() {
+
+    localStorage.removeItem("historialGoogle");
+
+    cargarHistorial();
+}
+
+
+/* =========================
+   INICIAR HISTORIAL
+========================= */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    cargarHistorial
+);
+
+</script>
+
+</body>
+</
+                                                                                                     
+
+
+            
